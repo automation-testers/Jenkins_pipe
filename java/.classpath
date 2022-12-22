@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Cucumber/src/test/java"/>
+	<classpathentry kind="src" path="DeepLink/src/test/java"/>
+	<classpathentry kind="src" path="IntegrateWithTestRail/src/main/java"/>
+	<classpathentry kind="src" path="java_gradle/src/test/java"/>
+	<classpathentry kind="src" path="java_testng_junit/src/main/java"/>
+	<classpathentry kind="src" path="ParallelWithTestNG/src/main/java"/>
+	<classpathentry kind="lib" path="java_gradle/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
