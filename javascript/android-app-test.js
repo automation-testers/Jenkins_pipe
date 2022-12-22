@@ -7,32 +7,13 @@ import {
 
 const username = process.env.KOBITON_USERNAME
 const apiKey = process.env.KOBITON_API_KEY
-
 const deviceName = process.env.KOBITON_DEVICE_NAME || 'Galaxy*'
-const deviceOrientation = process.env.KOBITON_SESSION_DEVICE_ORIENTATION || 'portrait'
-const captureScreenshots = Boolean(process.env.KOBITON_SESSION_CAPTURE_SCREENSHOTS) || true
-const deviceGroup = process.env.KOBITON_SESSION_DEVICE_GROUP || 'KOBITON'
-const app = process.env.KOBITON_SESSION_APPLICATION_URL || 'https://appium.github.io/appium/assets/ApiDemos-debug.apk'
-const platformName = process.env.KOBITON_DEVICE_PLATFORM_NAME || 'Android'
-const groupId = Number(process.env.KOBITON_ORGANIZATION_GROUP_ID)
 
 const kobitonServerConfig = {
-  protocol: 'http:',
+  protocol: 'https',
   host: 'api.kobiton.com',
   auth: `${username}:${apiKey}`
 }
-
-// const desiredCaps = {
-//   sessionName: 'Automation Test Session',
-//   sessionDescription: 'This is an example of automation testing of an Android application',
-//   deviceOrientation: deviceOrientation,
-//   captureScreenshots: captureScreenshots,
-//   deviceName: deviceName,
-//   deviceGroup: deviceGroup,
-//   platformName: platformName,
-//   app: app
-// }
-
 
 var webdriverKobitonServerConfig = {
   protocol: 'https',
@@ -83,9 +64,7 @@ if (!username || !apiKey) {
 
 describe('Android App sample', () => {
 
-
   before(async () => {
-
     driver = wd.promiseChainRemote(kobitonServerConfig)
 
     driver.on('status', (info) => {
@@ -100,32 +79,31 @@ describe('Android App sample', () => {
 
     try {
       await driver.init(desiredCaps)
-    } catch (err) {
+    }
+    catch (err) {
       if (err.data) {
         console.error(`init driver: ${err.data}`)
       }
-      throw err
+    throw err
     }
   })
 
   it('should show the app label', async () => {
-       
-        await driver.elementByClassName("android.widget.Button")
+    await driver.elementByClassName("android.widget.Button")
         .text().then(function (text) {
         console.log(text)
         assert.equal(text, 'Cancel')
-        
-      }) 
+      })
   })
 
-       
   after(async () => {
     if (driver != null) {
-      try {
-        await driver.quit()
-      } catch (err) {
-        console.error(`quit driver: ${err}`)
-      }
+    try {
+      await driver.quit()
     }
+    catch (err) {
+      console.error(`quit driver: ${err}`)
+    }
+  }
   })
 })
